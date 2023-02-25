@@ -2,9 +2,7 @@ package com.linc.aspect;
 
 import com.linc.model.Circle;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 
 @Aspect
 public class LoggingAspect {
@@ -13,9 +11,14 @@ public class LoggingAspect {
         Circle circle = (Circle) joinPoint.getTarget();
     }
 
-    @Before("args(name)")
-    public void stringArgMethods(String name) {
-        System.out.println("A method that takes String Arguments called. The value is: " + name);
+    @AfterReturning(pointcut = "args(name)", returning ="returnValue")
+    public void stringArgMethods(String name, Object returnValue) {
+        System.out.println("A method that takes String Arguments called. The value is: " + name + " The output value is: " + returnValue);
+    }
+
+    @AfterThrowing(pointcut = "args(name)", throwing = "exception")
+    public void exceptionAdvice(String name, Exception exception) {
+        System.out.println("An exception has been thrown: " + exception.toString());
     }
 
     @Pointcut("execution(* get*(..))")

@@ -12,7 +12,7 @@
         <property name="name" value="Triangle name"/>
     </bean>
     <bean name="circle" class="com.linc.model.Circle">
-        <property name="name" value="Circle name"/>
+<!--        <property name="name" value="Circle name"/>-->
     </bean>
     <!-- Service Beans-->
     <bean name="shapeService" class="com.linc.service.ShapeService" autowire="byName" />
